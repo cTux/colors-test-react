@@ -1,11 +1,10 @@
-import { getRandom } from "./getRandom";
+import { getRandom } from './getRandom';
 
 /**
  * @param {AppLevelColor} color
- * @param {Number} difficulty
  * @returns {AppLevelColor}
  */
-export const modifyColor = (color, difficulty) => {
+export const modifyColor = (color) => {
   /**
    * @type {AppLevelColor}
    */
@@ -14,7 +13,7 @@ export const modifyColor = (color, difficulty) => {
     value: [ ...color.value ],
   };
 
-  let timesToChange = 30 - difficulty * 5,
+  let timesToChange = 25,
     randomOffset = getRandom(1) === 1 ? 1 : -1;
 
   while (timesToChange--) {

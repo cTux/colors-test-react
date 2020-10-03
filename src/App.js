@@ -6,13 +6,6 @@ import { modifyColor } from './utils/modifyColor';
 
 export class App extends Component {
   /**
-   * @type {AppProps}
-   */
-  static defaultProps = {
-    difficulty: 1,
-  };
-
-  /**
    * @param {AppProps} props
    */
   constructor(props) {
@@ -22,24 +15,30 @@ export class App extends Component {
      * @type {AppState}
      */
     this.state = {
+      game: {
+        isStarted: false,
+        isFinished: false,
+        colors: [],
+      },
+
       points: {
         total: 0,
         correct: 0,
         wrong: 0,
       },
-
-      level: {
-        difficulty: props.difficulty,
-        colors: [],
-      },
     };
+
+    /**
+     * @type {Number}
+     */
+    this.latestHover = -1;
   }
 
   componentDidMount() {
-    this.startNewLevel();
+    this.startNewGame();
   }
 
-  startNewLevel() {
+  startNewGame() {
     const randomColorValue = getRandomColor();
 
     const colors = new Array(6)
@@ -52,20 +51,32 @@ export class App extends Component {
     const randomColorIndex = getRandom(5),
       randomColor = colors[randomColorIndex];
 
-    colors[randomColorIndex] = modifyColor(randomColor, this.state.level.difficulty);
+    colors[randomColorIndex] = modifyColor(randomColor);
 
     this.setState({
-      level: {
-        ...this.state.level,
+      game: {
+        ...this.state.game,
         colors,
       },
     });
   }
 
   /**
+   * @param {Number} index
+   */
+  handleHover(index) {
+    this.latestHover = index;
+  }
+
+  /**
+   * @param {Number} index
    * @param {Boolean} isCorrect
    */
-  handleColorClick(isCorrect) {
+  handleColorClick(index, isCorrect) {
+    if (this.latestHover !== index) {
+      return;
+    }
+
     this.setState({
       points: {
         total: this.state.points.total + 1,
@@ -73,16 +84,8 @@ export class App extends Component {
         wrong: this.state.points.wrong + (isCorrect ? 0 : 1),
       },
     }, () => {
-      this.startNewLevel();
+      this.startNewGame();
     });
-  }
-
-  renderDifficulty() {
-    return (
-      <div className={'app-difficulty'}>
-        Difficulty: {this.state.level.difficulty}
-      </div>
-    );
   }
 
   renderPoints() {
@@ -98,13 +101,14 @@ export class App extends Component {
   renderBoard() {
     return (
       <div className={'app-board'}>
-        {this.state.level.colors.map((cell, index) => {
+        {this.state.game.colors.map((cell, index) => {
           return (
             <div
               key={index}
               className={'app-board-cell'}
               style={{ backgroundColor: `rgb(${cell.value.join(', ')})` }}
-              onClick={() => this.handleColorClick(cell.isCorrect)}
+              onMouseMove={() => this.handleHover(index)}
+              onClick={() => this.handleColorClick(index, cell.isCorrect)}
             >
             </div>
           );
@@ -116,7 +120,6 @@ export class App extends Component {
   render() {
     return (
       <div className={'app'}>
-        {this.renderDifficulty()}
         {this.renderPoints()}
         {this.renderBoard()}
       </div>

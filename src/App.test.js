@@ -4,6 +4,6 @@ import { App } from './App';
 
 test('Renders difficulty', () => {
   const { getByText } = render(<App />);
-  const difficultyElement = getByText(/Difficulty/i);
-  expect(difficultyElement).toBeInTheDocument();
+  const titleElement = getByText(/Press "Start"!/i);
+  expect(titleElement).toBeInTheDocument();
 });

@@ -4,20 +4,16 @@ import { getRandomColor } from './utils/getRandomColor';
 import { getRandom } from './utils/getRandom';
 import { modifyColor } from './utils/modifyColor';
 
+const seconds = 60;
+
 export class App extends Component {
-  /**
-   * @param {AppProps} props
-   */
   constructor(props) {
     super(props);
-
-    /**
-     * @type {AppState}
-     */
     this.state = {
       game: {
         isStarted: false,
         isFinished: false,
+        secondsLeft: seconds,
         colors: [],
       },
 
@@ -25,30 +21,42 @@ export class App extends Component {
         total: 0,
         correct: 0,
         wrong: 0,
+        accuracy: 0,
+        tg: 0,
       },
     };
 
-    /**
-     * @type {Number}
-     */
+    this.interval = -1;
     this.latestHover = -1;
   }
 
-  componentDidMount() {
-    this.startNewGame();
+  startNewGame() {
+    this.startNewRound(() => {
+      this.setState({
+        game: {
+          ...this.state.game,
+          isStarted: true,
+          isFinished: false,
+          secondsLeft: seconds,
+        },
+      }, () => {
+        this.startInterval();
+      });
+    });
   }
 
-  startNewGame() {
-    const randomColorValue = getRandomColor();
+  startNewRound(callback = () => {}) {
+    const randomColorValue = getRandomColor(),
+      colorsNumber = 16;
 
-    const colors = new Array(6)
+    const colors = new Array(colorsNumber)
       .fill(undefined)
       .map(() => ({
         isCorrect: false,
         value: randomColorValue,
       }));
 
-    const randomColorIndex = getRandom(5),
+    const randomColorIndex = getRandom(colorsNumber - 1),
       randomColor = colors[randomColorIndex];
 
     colors[randomColorIndex] = modifyColor(randomColor);
@@ -57,6 +65,36 @@ export class App extends Component {
       game: {
         ...this.state.game,
         colors,
+      },
+    }, () => callback());
+  }
+
+  startInterval() {
+    this.interval = setInterval(() => this.decrementTimer(), 1000);
+  }
+
+  endInterval() {
+    clearInterval(this.interval);
+  }
+
+  decrementTimer() {
+    const newSeconds = this.state.game.secondsLeft - 1;
+    if (!newSeconds) {
+      this.endInterval();
+      this.setState({
+        game: {
+          ...this.state.game,
+          isStarted: false,
+          isFinished: true,
+        },
+      });
+      return;
+    }
+
+    this.setState({
+      game: {
+        ...this.state.game,
+        secondsLeft: newSeconds,
       },
     });
   }
@@ -77,30 +115,57 @@ export class App extends Component {
       return;
     }
 
+    const total = this.state.points.total + 1,
+      correct = this.state.points.correct + (isCorrect ? 1 : 0),
+      wrong = this.state.points.wrong + (isCorrect ? 0 : 1),
+      accuracy = (correct / total * 100) >> 0,
+      tg = Math.ceil(correct * correct / total * 5);
+
     this.setState({
       points: {
-        total: this.state.points.total + 1,
-        correct: this.state.points.correct + (isCorrect ? 1 : 0),
-        wrong: this.state.points.wrong + (isCorrect ? 0 : 1),
+        total,
+        correct,
+        wrong,
+        accuracy,
+        tg,
       },
     }, () => {
-      this.startNewGame();
+      this.startNewRound();
     });
   }
 
-  renderPoints() {
+  renderStartScreen() {
+    if (this.state.game.isStarted) {
+      return;
+    }
+
+    let titleText;
+    if (this.state.game.isFinished) {
+      titleText = `Correct: ${this.state.points.correct}, Accuracy: ${this.state.points.accuracy}%, Points: ${this.state.points.tg}`;
+    } else {
+      titleText = `Find different color!`;
+    }
+
     return (
-      <div className={'app-points'}>
-        <div className={'app-points-total'}>Total points: {this.state.points.total}</div>
-        <div className={'app-points-correct'}>Correct: {this.state.points.correct}</div>
-        <div className={'app-points-wrong'}>Wrong: {this.state.points.wrong}</div>
+      <div className={'app-start-screen'}>
+        <div className={'app-start-screen-title'}>{titleText}</div>
+        <div className={'app-start-screen-btn'}>
+          <button className={'app-start-game'} onClick={() => this.startNewGame()}>
+            Start
+          </button>
+        </div>
       </div>
     );
   }
 
   renderBoard() {
+    if (!this.state.game.isStarted) {
+      return;
+    }
+
     return (
       <div className={'app-board'}>
+        <div className={'app-board-timer'} style={{ width: `${this.state.game.secondsLeft / seconds * 100}%` }} />
         {this.state.game.colors.map((cell, index) => {
           return (
             <div
@@ -120,7 +185,7 @@ export class App extends Component {
   render() {
     return (
       <div className={'app'}>
-        {this.renderPoints()}
+        {this.renderStartScreen()}
         {this.renderBoard()}
       </div>
     );

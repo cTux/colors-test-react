@@ -1,13 +1,6 @@
 import { getRandom } from './getRandom';
 
-/**
- * @param {AppLevelColor} color
- * @returns {AppLevelColor}
- */
 export const modifyColor = (color) => {
-  /**
-   * @type {AppLevelColor}
-   */
   const newColor = {
     isCorrect: true,
     value: [ ...color.value ],

@@ -39,6 +39,13 @@ export class App extends Component {
           isFinished: false,
           secondsLeft: seconds,
         },
+        points: {
+          total: 0,
+          correct: 0,
+          wrong: 0,
+          accuracy: 0,
+          tg: 0,
+        },
       }, () => {
         this.startInterval();
       });

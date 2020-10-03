@@ -21,11 +21,6 @@ body {
   height: 100px;
   cursor: pointer;
   box-sizing: border-box;
-  border: 1px solid gray;
   float: left;
   margin: 1px;
-}
-
-.app-board-cell:hover {
-  border: 1px solid black;
 }

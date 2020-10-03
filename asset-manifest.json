@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/colors-test-react/static/css/main.e612fc52.chunk.css",
+    "main.css": "/colors-test-react/static/css/main.79a6db0d.chunk.css",
     "main.js": "/colors-test-react/static/js/main.7716a5af.chunk.js",
     "main.js.map": "/colors-test-react/static/js/main.7716a5af.chunk.js.map",
     "runtime-main.js": "/colors-test-react/static/js/runtime-main.e7fab4ee.js",
@@ -8,15 +8,15 @@
     "static/js/2.b001e514.chunk.js": "/colors-test-react/static/js/2.b001e514.chunk.js",
     "static/js/2.b001e514.chunk.js.map": "/colors-test-react/static/js/2.b001e514.chunk.js.map",
     "index.html": "/colors-test-react/index.html",
-    "precache-manifest.6c2269e434158bf22b37146ad40917f2.js": "/colors-test-react/precache-manifest.6c2269e434158bf22b37146ad40917f2.js",
+    "precache-manifest.fa6d81ec2be8cd86eb6ecdd2a19d534b.js": "/colors-test-react/precache-manifest.fa6d81ec2be8cd86eb6ecdd2a19d534b.js",
     "service-worker.js": "/colors-test-react/service-worker.js",
-    "static/css/main.e612fc52.chunk.css.map": "/colors-test-react/static/css/main.e612fc52.chunk.css.map",
+    "static/css/main.79a6db0d.chunk.css.map": "/colors-test-react/static/css/main.79a6db0d.chunk.css.map",
     "static/js/2.b001e514.chunk.js.LICENSE.txt": "/colors-test-react/static/js/2.b001e514.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.e7fab4ee.js",
     "static/js/2.b001e514.chunk.js",
-    "static/css/main.e612fc52.chunk.css",
+    "static/css/main.79a6db0d.chunk.css",
     "static/js/main.7716a5af.chunk.js"
   ]
 }

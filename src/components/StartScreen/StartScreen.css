@@ -1,0 +1,16 @@
+.app-start-screen-title,
+.app-start-screen-btn-container {
+    font-size: 72px;
+    text-align: center;
+    padding: 30px 40px;
+}
+
+.app-start-game-btn {
+    border: 0;
+    color: white;
+    background-color: darkgreen;
+    cursor: pointer;
+    font-size: 56px;
+    padding: 25px 34px;
+    border-radius: 12px;
+}

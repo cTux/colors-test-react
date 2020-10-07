@@ -1,0 +1,31 @@
+
+.app-board {
+    width: 403px;
+    height: 403px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: space-between;
+}
+
+.app-board-timer {
+    position: absolute;
+    height: 7px;
+    left: 0;
+    top: -15px;
+    background-color: red;
+    transition: 3s ease;
+}
+
+.app-board-cell {
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: 1s ease;
+}

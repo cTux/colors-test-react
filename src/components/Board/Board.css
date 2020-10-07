@@ -11,9 +11,8 @@
     box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    align-content: space-between;
-    padding: 12px;
+    justify-content: center;
+    align-content: center;
 }
 
 .app-board-timer {
@@ -31,4 +30,6 @@
     cursor: pointer;
     box-sizing: border-box;
     transition: 0.2s ease;
+    border: 1px solid black;
+    border-radius: 5px;
 }

@@ -16,7 +16,7 @@ export const mainReducer = (state = defaultState, action) => {
       return newGame(state);
 
     case 'NEW_ROUND':
-      return newRound(state, action);
+      return newRound(state);
 
     case 'DECREMENT_TIMER':
       return decrementTimer(state);

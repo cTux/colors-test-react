@@ -1,7 +1,9 @@
 
 .app-board {
-    width: 403px;
-    height: 403px;
+    width: 100vw;
+    height: 100vw;
+    max-height: 100vh;
+    max-width: 100vh;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -11,21 +13,22 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-content: space-between;
+    padding: 12px;
 }
 
 .app-board-timer {
-    position: absolute;
-    height: 7px;
+    position: fixed;
     left: 0;
-    top: -15px;
-    background-color: red;
-    transition: 3s ease;
+    top: 0;
+    transition: 1s ease;
 }
 
 .app-board-cell {
-    width: 100px;
-    height: 100px;
+    width: 22vw;
+    height: 22vw;
+    max-height: 22vh;
+    max-width: 22vh;
     cursor: pointer;
     box-sizing: border-box;
-    transition: 1s ease;
+    transition: 0.2s ease;
 }

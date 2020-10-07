@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './Board.css';
-import { secondsLeft } from '../../actions/newGame.config';
 
 export class Board extends Component {
   constructor(props) {
@@ -46,7 +45,9 @@ export class Board extends Component {
   render() {
     return (
       <div className={'app-board'}>
-        <div className={'app-board-timer'} style={{ width: `${this.props.game.secondsLeft / secondsLeft * 100}%` }} />
+        <div className={'app-board-timer'}>
+          {this.props.game.secondsLeft}
+        </div>
         {this.props.game.colors.map((cell, index) => {
           return (
             <div

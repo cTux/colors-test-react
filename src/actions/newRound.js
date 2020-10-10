@@ -1,4 +1,6 @@
 import { getRandomColors } from '../utils/getRandomColors';
+import { getCurrentDifferences } from '../utils/getCurrentDifferences';
+import { getCurrentSize } from '../utils/getCurrentSize';
 
 /**
  * @param {AppState} state
@@ -7,9 +9,12 @@ import { getRandomColors } from '../utils/getRandomColors';
 export const newRound = (state) => {
   return {
     ...state,
-    game: {
-      ...state.game,
-      colors: getRandomColors(),
+    board: {
+      ...state.board,
+      colors: getRandomColors(
+        getCurrentSize(state),
+        getCurrentDifferences(state),
+      ),
     },
   };
 };

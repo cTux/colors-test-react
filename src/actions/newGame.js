@@ -1,5 +1,7 @@
 import { secondsLeft } from './newGame.config';
 import { getRandomColors } from '../utils/getRandomColors';
+import { getCurrentDifferences } from '../utils/getCurrentDifferences';
+import { getCurrentSize } from '../utils/getCurrentSize';
 
 /**
  * @param {AppState} state
@@ -7,12 +9,19 @@ import { getRandomColors } from '../utils/getRandomColors';
  */
 export const newGame = (state) => {
   return {
+    ...state,
     game: {
       ...state.game,
       isStarted: true,
       isFinished: false,
       secondsLeft,
-      colors: getRandomColors(),
+    },
+    board: {
+      ...state.board,
+      colors: getRandomColors(
+        getCurrentSize(state),
+        getCurrentDifferences(state),
+      ),
     },
     points: {
       total: 0,

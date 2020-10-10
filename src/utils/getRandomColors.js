@@ -2,9 +2,9 @@ import { getRandom } from './getRandom';
 import { getRandomColor } from './getRandomColor';
 import { modifyColor } from './modifyColor';
 
-export const getRandomColors = () => {
+export const getRandomColors = (size, differences) => {
   const randomColorValue = getRandomColor(),
-    colorsNumber = 16;
+    colorsNumber = size * size;
 
   const colors = new Array(colorsNumber)
     .fill(undefined)
@@ -16,7 +16,7 @@ export const getRandomColors = () => {
   const randomColorIndex = getRandom(colorsNumber - 1),
     randomColor = colors[randomColorIndex];
 
-  colors[randomColorIndex] = modifyColor(randomColor);
+  colors[randomColorIndex] = modifyColor(randomColor, differences);
 
   return colors;
 };

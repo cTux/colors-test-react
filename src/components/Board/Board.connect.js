@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { Board } from './Board';
 import { decrementTimerAction } from '../../actions/decrementTimer';
 import { colorClickAction } from '../../actions/colorClick';
+import { getCurrentSize } from '../../utils/getCurrentSize';
 
 /**
  * @param {AppState} state
@@ -10,8 +11,11 @@ import { colorClickAction } from '../../actions/colorClick';
 const mapStateToProps = state => ({
   game: {
     secondsLeft: state.game.secondsLeft,
-    colors: state.game.colors,
   },
+  board: {
+    colors: state.board.colors,
+  },
+  size: getCurrentSize(state),
 });
 
 const mapDispatchToProps = dispatch => ({

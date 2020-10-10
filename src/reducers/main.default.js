@@ -1,3 +1,5 @@
+import { getConfig } from '../utils/getConfig';
+
 /**
  * @type {AppState}
  */
@@ -6,6 +8,11 @@ export const defaultState = {
     isStarted: false,
     isFinished: false,
     secondsLeft: 0,
+  },
+
+  config: getConfig(),
+
+  board: {
     colors: [],
   },
 

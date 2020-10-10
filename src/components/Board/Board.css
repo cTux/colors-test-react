@@ -17,20 +17,29 @@
 
 .app-board-timer {
     position: fixed;
-    left: 0;
+    right: 0;
     top: 0;
     transition: 1s ease;
 }
 
 .app-board-cell {
-    width: 22vw;
-    height: 22vw;
-    max-height: 22vh;
-    max-width: 22vh;
     cursor: pointer;
     box-sizing: border-box;
     transition: 0.2s ease;
     border-right: 1px solid black;
     border-bottom: 1px solid black;
     border-radius: 5px;
+}
+
+.app-board.size-4 .app-board-cell {
+    width: 23%;
+    height: 23%;
+}
+.app-board.size-3 .app-board-cell {
+    width: calc(92% / 3);
+    height: calc(92% / 3);
+}
+.app-board.size-2 .app-board-cell {
+    width: 46%;
+    height: 46%;
 }

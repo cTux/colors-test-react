@@ -44,11 +44,11 @@ export class Board extends Component {
 
   render() {
     return (
-      <div className={'app-board'}>
+      <div className={`app-board size-${this.props.size}`}>
         <div className={'app-board-timer'}>
           {this.props.game.secondsLeft}
         </div>
-        {this.props.game.colors.map((cell, index) => {
+        {this.props.board.colors.map((cell, index) => {
           return (
             <div
               key={index}

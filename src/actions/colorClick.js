@@ -1,4 +1,6 @@
 import { getRandomColors } from '../utils/getRandomColors';
+import { getCurrentDifferences } from '../utils/getCurrentDifferences';
+import { getCurrentSize } from '../utils/getCurrentSize';
 
 /**
  * @param {AppState} state
@@ -23,9 +25,12 @@ export const colorClick = (state, action) => {
       accuracy,
       tg,
     },
-    game: {
-      ...state.game,
-      colors: getRandomColors(),
+    board: {
+      ...state.board,
+      colors: getRandomColors(
+        getCurrentSize(state),
+        getCurrentDifferences(state),
+      ),
     },
   };
 };
